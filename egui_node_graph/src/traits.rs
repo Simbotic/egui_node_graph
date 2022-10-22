@@ -76,6 +76,17 @@ where
     where
         Self::Response: UserResponseTrait;
 
+    /// Alternative title for the node. If `None`, the default title will be used.
+    fn titlebar_ui(
+        &self,
+        ui: &mut egui::Ui,
+        node_id: NodeId,
+        graph: &Graph<Self, Self::DataType, Self::ValueType>,
+        user_state: &mut Self::UserState,
+    ) -> Vec<NodeResponse<Self::Response, Self>>
+    where
+        Self::Response: UserResponseTrait;
+
     /// Set background color on titlebar
     /// If the return value is None, the default color is set.
     fn titlebar_color(

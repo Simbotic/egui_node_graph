@@ -365,7 +365,7 @@ where
 }
 
 fn draw_connection(painter: &Painter, src_pos: Pos2, dst_pos: Pos2, color: Color32) {
-    let connection_stroke = egui::Stroke { width: 5.0, color };
+    let connection_stroke = egui::Stroke { width: 2.0, color };
 
     let control_scale = ((dst_pos.x - src_pos.x) / 2.0).max(30.0);
     let src_control = src_pos + Vec2::X * control_scale;
@@ -451,12 +451,12 @@ where
 
         child_ui.vertical(|ui| {
             ui.horizontal(|ui| {
-                ui.add(Label::new(
-                    RichText::new(&self.graph[self.node_id].label)
-                        .text_style(TextStyle::Button)
-                        .color(text_color),
-                ));
-                ui.add_space(8.0); // The size of the little cross icon
+                responses.extend(
+                    self.graph[self.node_id]
+                        .user_data
+                        .titlebar_ui(ui, self.node_id, self.graph, user_state)
+                        .into_iter(),
+                );
             });
             ui.add_space(margin.y);
             title_height = ui.min_size().y;
@@ -701,9 +701,9 @@ where
         // --- Interaction ---
 
         // Titlebar buttons
-        if Self::close_button(ui, outer_rect).clicked() {
-            responses.push(NodeResponse::DeleteNodeUi(self.node_id));
-        };
+        // if Self::close_button(ui, outer_rect).clicked() {
+        //     responses.push(NodeResponse::DeleteNodeUi(self.node_id));
+        // };
 
         let window_response = ui.interact(
             outer_rect,

@@ -43,4 +43,4 @@ pub use traits::*;
 
 mod utils;
 
-mod color_hex_utils;
+pub mod color_hex_utils;

@@ -335,6 +335,20 @@ impl NodeDataTrait for MyNodeData {
 
         responses
     }
+
+    fn titlebar_ui(
+            &self,
+            _ui: &mut egui::Ui,
+            _node_id: NodeId,
+            _graph: &Graph<Self, Self::DataType, Self::ValueType>,
+            _user_state: &mut Self::UserState,
+        ) -> Vec<NodeResponse<Self::Response, Self>>
+        where
+            Self::Response: UserResponseTrait {
+        {
+            vec![]
+        }
+    }
 }
 
 type MyGraph = Graph<MyNodeData, MyDataType, MyValueType>;
